@@ -1,0 +1,54 @@
+version: "3.5"
+networks:
+ dummy-network:
+    driver: bridge
+    name: dummy-network
+services:
+  service1:
+    container_name: service1
+    build:
+      context: ./service1
+      dockerfile: Dockerfile
+    image: service1:latest
+    ports:
+      - 7000:7000
+    environment:
+      - url=http://service2:7001
+  service2:
+    container_name: service2
+    build:
+      context: ./service2
+      dockerfile: Dockerfile
+    image: service2:latest
+    ports:
+      - 7001:7001
+    environment:
+      - url=http://service3:7002
+  service3:
+    container_name: service3
+    build:
+      context: ./service3
+      dockerfile: Dockerfile
+    image: service3:latest
+    ports:
+      - 7002:7002
+    environment:
+      - url=http://service4:7003
+  service4:
+    container_name: service4
+    build: 
+      context: ./service4
+      dockerfile: Dockerfile
+    image: service4:latest
+    ports:
+      - 7003:7003
+    environment:
+      - url=http://service5:7004
+  service5:
+    container_name: service5
+    build:
+      context: ./service5
+      dockerfile: Dockerfile
+    image: service5:latest
+    ports:
+      - 7004:7004
